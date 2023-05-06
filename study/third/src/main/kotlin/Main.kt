@@ -3,8 +3,14 @@ fun main(args: Array<String>) {
     //fnforarray()
     //fnlistarray()
     //fnmutablelistarray()
-    fnmaparray()
-    fnmutablemaparray()
+    //fnmaparray()
+    //fnmutablemaparray()
+    //fnhello("Taro")
+    //fnprice()
+    //println(lambda(500, 10))
+    println(fntailrec(1))
+    println(fntailrec(3))
+    println(fntailrec(5))
 }
 
 fun fnarray() {
@@ -68,5 +74,32 @@ fun fnmutablemaparray() {
     arr["l4"] = "centOS"
     for((k, v) in arr) {
         println("Key:" + k + ", Value:" + v)
+    }
+}
+
+fun fnhello(str:String) {
+    println("Hello, " + str)
+}
+
+fun fnprice() {
+    val arr = arrayOf(10, 20, 30)
+    var total = 0
+    for(p in arr) {
+        total += p
+    }
+    println("Price:" + total + ", Tax:" + fntax(total))
+}
+
+fun fntax(price:Int, tax:Double = 0.08):Int {
+    return (price * tax).toInt()
+}
+
+fun lambda(price:Int, rate:Int) = (price * (100.0 + rate) / 100.0).toInt()
+
+tailrec fun fntailrec(n:Int, m:Int = 1):Int {
+    if(n === 1) {
+        return m
+    } else {
+        return fntailrec(n - 1, m * n)
     }
 }
