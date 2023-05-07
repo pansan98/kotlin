@@ -16,6 +16,9 @@ fun main(args: Array<String>) {
             println("Hello," + name + "(" + age + ")さん")
     }
     fni.say("fnInterface", 5)
+
+    val at = Attr("Attribute Name", "attribute@example.com", 100)
+    at.say(at)
 }
 
 interface Vector {
@@ -47,4 +50,10 @@ fun interface Vec {
 
 fun interface fninterface {
     fun say(name:String, age:Int)
+}
+
+data class Attr(val name:String, val email:String, val age:Int) {
+    fun say(attr:Attr) {
+        println("Name: ${attr.name} Email: ${attr.email} Age: ${attr.age}")
+    }
 }
