@@ -3,3 +3,4 @@ _*
 .gradle
 *.jar
 study/*/build
+out
