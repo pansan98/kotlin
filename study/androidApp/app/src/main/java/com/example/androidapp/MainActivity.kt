@@ -2,6 +2,8 @@ package com.example.androidapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
+import com.example.androidapp.ui.main.MainViewModel
 import com.example.androidapp.databinding.ActivityMainBinding
 import android.widget.Toast
 import android.widget.*
@@ -9,15 +11,23 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // 廃止されたのでなし
-        //setContentView(R.layout.activity_main)
 
         // TODO bindingさせる（まだ詳細がわからないので後で調べる）
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        fun updateData() {
+            binding.viewText.text = viewModel.getAll()
+        }
+        // 廃止されたのでなし
+        //setContentView(R.layout.activity_main)
+
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        updateData()
 
         binding.switch1.setOnCheckedChangeListener {btn: CompoundButton, f: Boolean ->
             Toast.makeText(binding.root.context, "checked:${f}.", Toast.LENGTH_SHORT).show()
@@ -40,6 +50,14 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(binding.root.context, "値：${vol}", Toast.LENGTH_SHORT).show()
             }
         })
+
+        binding.saveButton.setOnClickListener {
+            val txt = binding.editText.text
+            viewModel.add(txt.toString())
+            binding.editText.text = null
+            updateData()
+            Toast.makeText(binding.root.context, txt, Toast.LENGTH_SHORT).show()
+        }
 
 //        binding.button.setOnClickListener {
 //            val txt = binding.editText.text

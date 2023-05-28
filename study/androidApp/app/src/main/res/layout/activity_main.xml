@@ -1,82 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.main.MainFragment">
+>
+        <data>
+            <variable
+                    name="viewmodel"
+                    type="com.example.androidapp.ui.main.MainViewModel"
+            />
+        </data>
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ui.MainActivity">
 
-    <TextView
-            android:id="@+id/message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="plz Message"
-            android:textSize="30sp"
-            android:padding="10sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintVertical_bias="0.102"/>
+            <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text=""
+                    android:ems="10"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.05"
+                    android:textSize="24sp"
+                    android:padding="10dp"
+                    tools:ignore="MissingConstraints"
+            />
 
-    <Button
-            android:id="@+id/button"
-            android:text="Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/message"
-            android:padding="20dp"
-            android:layout_marginTop="20dp"
-            android:textSize="20sp"
-            tools:ignore="MissingConstraints" app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="4dp"/>
+            <Button
+                    android:id="@+id/saveButton"
+                    android:text="Save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/editText"
+                    android:padding="20dp"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="0dp"
+                    android:layout_marginTop="10dp"
+                    tools:ignore="MissingConstraints"
+            />
 
-    <Switch
-        android:text="Switch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/switch1"
-        app:layout_constraintTop_toBottomOf="@id/button"
-        android:padding="10sp"
-        android:textSize="20sp"
-        tools:ignore="MissingConstraints"/>
+            <TextView
+                    android:id="@+id/viewText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hello"
+                    app:layout_constraintTop_toBottomOf="@id/saveButton"
+                    android:textSize="24sp"
+                    android:padding="10sp"
+                    android:layout_marginTop="20dp"
+            />
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/switch1"
-        android:padding="10sp"
-        android:textSize="20sp"
-        tools:ignore="MissingConstraints"
-    >
-        <RadioButton
-                android:text="Radio A"
-                android:padding="10sp"
-                android:textSize="20sp"
+            <Switch
+                android:text="Switch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/radio1"
-        />
-        <RadioButton
-                android:text="Radio B"
+                android:id="@+id/switch1"
+                app:layout_constraintTop_toBottomOf="@id/viewText"
                 android:padding="10sp"
                 android:textSize="20sp"
+                tools:ignore="MissingConstraints"
+            />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/radio2"
-        />
-    </RadioGroup>
+                app:layout_constraintTop_toBottomOf="@id/switch1"
+                android:padding="10sp"
+                android:textSize="20sp"
+                tools:ignore="MissingConstraints"
+            >
+                <RadioButton
+                        android:text="Radio A"
+                        android:padding="10sp"
+                        android:textSize="20sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radio1"
+                />
+                <RadioButton
+                        android:text="Radio B"
+                        android:padding="10sp"
+                        android:textSize="20sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radio2"
+                />
+            </RadioGroup>
 
-    <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBar"
-            app:layout_constraintTop_toBottomOf="@id/radioGroup"
-            android:padding="10sp"
-            tools:ignore="MissingConstraints"
-    />
+            <SeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/seekBar"
+                    app:layout_constraintTop_toBottomOf="@id/radioGroup"
+                    android:padding="10sp"
+                    tools:ignore="MissingConstraints"
+            />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
