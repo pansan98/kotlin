@@ -8,6 +8,7 @@ import com.example.androidapp.databinding.ActivityMainBinding
 import android.widget.Toast
 import android.widget.*
 import android.widget.SeekBar.OnSeekBarChangeListener
+import androidx.databinding.DataBindingUtil
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -20,14 +21,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        fun updateData() {
-            binding.viewText.text = viewModel.getAll()
-        }
+//        fun updateData() {
+//            binding.viewText.text = viewModel.getAll()
+//        }
         // 廃止されたのでなし
         //setContentView(R.layout.activity_main)
 
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        updateData()
+        binding.viewmodel = viewModel
+        //updateData()
 
         binding.switch1.setOnCheckedChangeListener {btn: CompoundButton, f: Boolean ->
             Toast.makeText(binding.root.context, "checked:${f}.", Toast.LENGTH_SHORT).show()
@@ -55,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             val txt = binding.editText.text
             viewModel.add(txt.toString())
             binding.editText.text = null
-            updateData()
+            //updateData()
             Toast.makeText(binding.root.context, txt, Toast.LENGTH_SHORT).show()
         }
 
