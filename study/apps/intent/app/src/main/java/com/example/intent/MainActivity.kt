@@ -29,6 +29,11 @@ class MainActivity : AppCompatActivity() {
         lvMenu.onItemClickListener = ListItemClickListener()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_options_list, menu)
+        return true
+    }
+
     private fun createTeishokuList(): MutableList<MutableMap<String, Any>> {
         // 定食メニューリストのListオブジェクトを用意
         val menulist: MutableList<MutableMap<String, Any>> = mutableListOf()
