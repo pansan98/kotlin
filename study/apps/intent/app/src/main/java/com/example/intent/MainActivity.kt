@@ -34,6 +34,26 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        var returnVal = true
+        when(item.itemId) {
+            R.id.menuListOptionTeishoku ->
+                _menulist = createTeishokuList()
+            R.id.menuListOptionCurry ->
+                _menulist = createCurryList()
+            else ->
+                returnVal = super.onOptionsItemSelected(item)
+        }
+
+        // Viewを取得
+        val lvMenu = findViewById<ListView>(R.id.lvMenu)
+        // SimpleAdapterに選択したメニューを表示
+        val adapter = SimpleAdapter(this@MainActivity, _menulist, R.layout.row, _from, _to)
+        lvMenu.adapter = adapter
+
+        return returnVal
+    }
+
     private fun createTeishokuList(): MutableList<MutableMap<String, Any>> {
         // 定食メニューリストのListオブジェクトを用意
         val menulist: MutableList<MutableMap<String, Any>> = mutableListOf()
@@ -69,5 +89,24 @@ class MainActivity : AppCompatActivity() {
             // 第2画面の起動
             startActivity(intent2MenuThanks)
         }
+    }
+
+    private fun createCurryList(): MutableList<MutableMap<String, Any>> {
+        // カレーメニューリストを用意
+        val menulist: MutableList<MutableMap<String, Any>> = mutableListOf()
+        // カレーのデータを入れる
+        var menu = mutableMapOf<String, Any>("name" to "ビーフカレー", "price" to 1020, "desc" to "特選スパイスをきかせた国産ビーフです。")
+        menulist.add(menu)
+
+        menu = mutableMapOf("name" to "ポークカレー", "price" to 920, "desc" to "国産ポーク100%です。")
+        menulist.add(menu)
+
+        menu = mutableMapOf("name" to "ほうれん草カレー", "price" to 890, "desc" to "ほうれん草たっぷりのカレーです。")
+        menulist.add(menu)
+
+        menu = mutableMapOf("name" to "牛こくカレー", "price" to 850, "desc" to "通常の牛肉を入れた定番カレーです。")
+        menulist.add(menu)
+
+        return menulist
     }
 }
