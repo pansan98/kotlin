@@ -27,11 +27,24 @@ class MainActivity : AppCompatActivity() {
         val adapter = SimpleAdapter(this@MainActivity, _menulist, R.layout.row, _from, _to)
         lvMenu.adapter = adapter
         lvMenu.onItemClickListener = ListItemClickListener()
+
+        registerForContextMenu(lvMenu)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_options_list, menu)
         return true
+    }
+
+    override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
+        // 親クラスのメソッドを呼び出す
+        super.onCreateContextMenu(menu, v, menuInfo)
+
+        // コンテキストメニュー用xmlをインフレート
+        menuInflater.inflate(R.menu.menu_context, menu)
+
+        // コンテキストメニューのヘッダタイトルを設定
+        menu?.setHeaderTitle(R.string.menu_list_context_header)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
