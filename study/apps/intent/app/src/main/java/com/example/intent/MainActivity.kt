@@ -47,6 +47,35 @@ class MainActivity : AppCompatActivity() {
         menu?.setHeaderTitle(R.string.menu_list_context_header)
     }
 
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        var returnVal = true
+        // 長押しされたビューに関する情報が格納されたオブジェクトを取得
+        val info = item.menuInfo as AdapterView.AdapterContextMenuInfo
+        // 長押しされたリストのポジションを取得
+        val listPosition = info.position
+        // ポジションから長押しされたメニュー情報Mapオブジェクトを取得
+        val menu = _menulist[listPosition]
+
+        // 選択されたメニューのIDのR値による処理の分岐
+        when(item.itemId) {
+            // [説明を表示]が選択された時
+            R.id.menuListContext -> {
+                // メニューの説明文を取得
+                val desc = menu["desc"] as String
+                // トースト表示
+                Toast.makeText(this@MainActivity, desc, Toast.LENGTH_LONG).show()
+            }
+            R.id.menuListContextOrder -> {
+                order(menu)
+            }
+            else -> {
+                returnVal = super.onContextItemSelected(item)
+            }
+        }
+
+        return returnVal
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         var returnVal = true
         when(item.itemId) {
@@ -87,20 +116,35 @@ class MainActivity : AppCompatActivity() {
         return menulist
     }
 
+    private fun order(menu: MutableMap<String, Any>) {
+        // 定食名と値段を取得。Anyなのでキャスト
+        val menuName = menu["name"] as String
+        val menuPrice = menu["price"] as Int
+
+        // インテントオブジェクトを生成
+        val intent2MenuThanks = Intent(this@MainActivity, MenuThanksActivity::class.java)
+        // 第2画面に送るデータを格納
+        intent2MenuThanks.putExtra("name", menuName)
+        intent2MenuThanks.putExtra("price", "${menuPrice}円")
+        startActivity(intent2MenuThanks)
+    }
+
     private inner class ListItemClickListener : AdapterView.OnItemClickListener {
         override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
             // タップされた行のデータを取得。SimpleAdapterでは1行のデータはMutableMap型になる
             val item = parent.getItemAtPosition(position) as MutableMap<String, Any>
-            // 定食名と金額
-            val menuName = item["name"] as String
-            val menuPrice = item["price"] as Int
-            // インテントオブジェクトを生成
-            val intent2MenuThanks = Intent(this@MainActivity, MenuThanksActivity::class.java)
-            // 第2画面に送るデータを格納
-            intent2MenuThanks.putExtra("name", menuName)
-            intent2MenuThanks.putExtra("price", "${menuPrice}円")
-            // 第2画面の起動
-            startActivity(intent2MenuThanks)
+            // 置き換えました。
+            order(item)
+//            // 定食名と金額
+//            val menuName = item["name"] as String
+//            val menuPrice = item["price"] as Int
+//            // インテントオブジェクトを生成
+//            val intent2MenuThanks = Intent(this@MainActivity, MenuThanksActivity::class.java)
+//            // 第2画面に送るデータを格納
+//            intent2MenuThanks.putExtra("name", menuName)
+//            intent2MenuThanks.putExtra("price", "${menuPrice}円")
+//            // 第2画面の起動
+//            startActivity(intent2MenuThanks)
         }
     }
 
