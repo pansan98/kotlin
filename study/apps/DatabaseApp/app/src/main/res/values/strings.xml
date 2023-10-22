@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">DatabaseApp</string>
+    <string-array name="cocktail_list">
+        <item>ホワイトレディー</item>
+        <item>パラライカ</item>
+        <item>XYZ</item>
+        <item>ニューヨーク</item>
+        <item>マンハッタン</item>
+        <item>ミシシッピミュール</item>
+        <item>ブルーハワイ</item>
+        <item>マイタイ</item>
+        <item>マティーニ</item>
+        <item>モヒート</item>
+    </string-array>
+    <string name="lb_name">選択したカクテル：</string>
+    <string name="name">未選択</string>
+    <string name="lb_note">メモ：</string>
+    <string name="btn_save">保存</string>
+</resources>
